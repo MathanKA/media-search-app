@@ -1,0 +1,49 @@
+<div class="row">
+    <div class="col-md-12">
+        <form>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="search a movie name" [(ngModel)]="searchStr" name="searchStr" (keyup.enter)="searchMovies()">    
+            </div>    
+        </form>    
+    </div>    
+</div>
+
+<div *ngIf="searchRes.length > 0" >
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Search Results</h3>
+  </div>
+  <div class="panel-body">
+    <div class="row" >
+        <div *ngFor="let movie of searchRes, let i = index">
+            <div class="col-md-2 arrange">
+            <img *ngIf="movie.poster_path" class="thumbnail responsive" src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}">
+            <img *ngIf="!movie.poster_path" class="thumbnail" src="https://s-media-cache-ak0.pinimg.com/originals/d3/8b/c3/d38bc38ad9ba60f9091aa2a9b3f4190f.png">
+            <h5>{{movie.title}}</h5>
+            <p>{{movie.release_date}}</p>
+            <p><a href="#" routerLink="/movie/{{movie.id}}" class="btn btn-default">View Details</a></p>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Popular Movies List</h3>
+  </div>
+  <div class="panel-body">
+    <div class="row" *ngIf="popularMovies">
+        <div *ngFor = "let movie of popularMovies, let i = index">
+            <div *ngIf="i < 6" class="col-md-2 arrange" >
+                <img *ngIf="movie.poster_path" class="thumbnail" src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}">
+                <img *ngIf="!movie.poster_path" class="thumbnail" src="https://s-media-cache-ak0.pinimg.com/originals/d3/8b/c3/d38bc38ad9ba60f9091aa2a9b3f4190f.png">
+                <h5>{{movie.title}}</h5>
+                <p>{{movie.release_date}}</p>
+                <p><a href="#" routerLink="/movie/{{movie.id}}" class="btn btn-default">View Details</a></p>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
